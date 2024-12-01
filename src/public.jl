@@ -26,6 +26,11 @@ export JuliaWorkspace,
 
 # Files
 
+"""
+    add_file!(jw::JuliaWorkspace, file::TextFile)
+
+Add a file to the workspace. If the file already exists, it will throw an error.
+"""
 function add_file!(jw::JuliaWorkspace, file::TextFile)
     files = input_files(jw.runtime)
 
@@ -38,16 +43,31 @@ function add_file!(jw::JuliaWorkspace, file::TextFile)
     set_input_text_file!(jw.runtime, file.uri, file)
 end
 
+"""
+    update_file!(jw::JuliaWorkspace, file::TextFile)
+
+Update a file in the workspace. If the file does not exist, it will throw an error.
+"""
 function update_file!(jw::JuliaWorkspace, file::TextFile)
     has_file(jw, file.uri) || throw(JWUnknownFile("Cannot update unknown file $(file.uri)."))
 
     set_input_text_file!(jw.runtime, file.uri, file)
 end
 
+"""
+    get_text_files(jw::JuliaWorkspace)
+
+Get all text files from the workspace.
+"""
 function get_text_files(jw::JuliaWorkspace)
     return derived_text_files(jw.runtime)
 end
 
+"""
+    get_julia_files(jw::JuliaWorkspace)
+
+Get all Julia files from the workspace.
+"""
 function get_julia_files(jw::JuliaWorkspace)
     return derived_julia_files(jw.runtime)
 end
