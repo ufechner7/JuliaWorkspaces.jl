@@ -99,6 +99,13 @@ function position_at(source_text::SourceText, x)
     error("This should never happen")
 end
 
+"""
+    struct TextFile
+
+A text file, consisting of its URI and content.
+
+$(TYPEDFIELDS)
+"""
 @auto_hash_equals struct TextFile
     uri::URI
     content::SourceText
