@@ -1,3 +1,10 @@
+"""
+    struct TestItemDetail
+
+Details of a test item.
+
+$(TYPEDFIELDS)
+"""
 @auto_hash_equals struct TestItemDetail
     uri::URI
     id::String
@@ -9,6 +16,13 @@
     option_setup::Vector{Symbol}
 end
 
+"""
+    struct TestSetupDetail
+
+Details of a test setup.
+
+$(TYPEDFIELDS)
+"""
 @auto_hash_equals struct TestSetupDetail
     uri::URI
     name::Symbol
@@ -17,6 +31,13 @@ end
     code_range::UnitRange{Int}
 end
 
+"""
+    struct TestErrorDetail
+
+Details of a test error.
+
+$(TYPEDFIELDS)
+"""
 @auto_hash_equals struct TestErrorDetail
     uri::URI
     id::String
