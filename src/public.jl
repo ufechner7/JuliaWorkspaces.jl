@@ -204,14 +204,36 @@ end
 
 # Diagnostics
 
+"""
+    get_diagnostic(jw::JuliaWorkspace, uri::URI)
+
+Get the diagnostics of a file from the workspace.
+
+# Returns
+
+- A vector of `Diagnostic` structs.
+"""
 function get_diagnostic(jw::JuliaWorkspace, uri::URI)
     return derived_diagnostics(jw.runtime, uri)
 end
 
+"""
+    get_diagnostics(jw::JuliaWorkspace)
+
+Get all diagnostics from the workspace.
+
+# Returns
+- A vector of `Diagnostic` structs.
+"""
 function get_diagnostics(jw::JuliaWorkspace)
     return derived_all_diagnostics(jw.runtime)
 end
 
+"""
+    mark_current_diagnostics(jw::JuliaWorkspace)
+
+Mark the current diagnostics in the workspace.
+"""
 function mark_current_diagnostics(jw::JuliaWorkspace)
     files = derived_text_files(jw.runtime)
 
@@ -223,24 +245,63 @@ function mark_current_diagnostics(jw::JuliaWorkspace)
     set_input_marked_diagnostics!(jw.runtime, DiagnosticsMark(uuid4(), results))
 end
 
+"""
+    get_files_with_updated_diagnostics(jw::JuliaWorkspace)
+
+Returns
+
+- a tuple of the updated and the deleted files since calling `mark_current_diagnostics()`
+"""
 function get_files_with_updated_diagnostics(jw::JuliaWorkspace)
     return derived_diagnostic_updated_since_mark(jw.runtime)
 end
 
 # Test items
 
+"""
+    get_test_items(jw::JuliaWorkspace, uri::URI)
+
+Get the test items the belong to a given `uri` of a workspace.
+
+Returns
+
+- the struct `TestDetails`
+"""
 function get_test_items(jw::JuliaWorkspace, uri::URI)
     derived_testitems(jw.runtime, uri)
 end
 
+"""
+    get_test_items(jw::JuliaWorkspace)
+
+Get all test items of the workspace `jw`.
+
+Returns
+
+- an instance of the struct `TestDetails`
+"""
 function get_test_items(jw::JuliaWorkspace)
     derived_all_testitems(jw.runtime)
 end
 
+"""
+    get_test_env(jw::JuliaWorkspace, uri::URI)
+
+Get the test environment that belongs to the given `uri` of the workspace `jw`.
+
+Returns
+
+- a instance of the struct `JuliaTestEnv`
+"""
 function get_test_env(jw::JuliaWorkspace, uri::URI)
     derived_testenv(jw.runtime, uri)
 end
 
+"""
+    mark_current_testitems(jw::JuliaWorkspace)
+
+Mark all current test items of the workspace `jw`.
+"""
 function mark_current_testitems(jw::JuliaWorkspace)
     files = derived_julia_files(jw.runtime)
 
@@ -253,6 +314,15 @@ function mark_current_testitems(jw::JuliaWorkspace)
     set_input_marked_testitems!(jw.runtime, TestitemsMark(uuid4(), results))
 end
 
+"""
+    get_files_with_updated_testitems(jw::JuliaWorkspace)
+
+Get all files with test items that were updated since marked of the workspace `jw`.
+
+Returns
+
+- the tuple (updated_files, deleted_files)
+"""
 function get_files_with_updated_testitems(jw::JuliaWorkspace)
     # @info "get_files_with_updated_testitems" string.(input_files(jw.runtime))
     # graph = Salsa.Inspect.build_graph(jw.runtime)
