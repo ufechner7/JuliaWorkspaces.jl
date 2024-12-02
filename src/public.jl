@@ -60,6 +60,7 @@ end
 Get all text files from the workspace.
 
 # Returns
+
 - A set of URIs.
 """
 function get_text_files(jw::JuliaWorkspace)
@@ -72,6 +73,7 @@ end
 Get all Julia files from the workspace.
 
 # Returns
+
 - A set of URIs.
 """
 function get_julia_files(jw::JuliaWorkspace)
@@ -105,6 +107,7 @@ end
 Get a text file from the workspace. If the file does not exist, it will throw an error.
 
 # Returns
+
 - A `TextFile` struct.
 """
 function get_text_file(jw::JuliaWorkspace, uri::URI)
@@ -159,6 +162,7 @@ end
 Get all packages from the workspace.
 
 # Returns
+
 - A set of URIs.
 """
 function get_packages(jw::JuliaWorkspace)
@@ -171,6 +175,7 @@ end
 Get all projects from the workspace.
 
 # Returns
+
 - A set of URIs.
 """
 function get_projects(jw::JuliaWorkspace)
@@ -261,7 +266,7 @@ end
 """
     get_test_items(jw::JuliaWorkspace, uri::URI)
 
-Get the test items the belong to a given `uri` of a workspace.
+Get the test items that belong to a given `uri` of a workspace.
 
 Returns
 
